@@ -11,7 +11,10 @@
 county_est
 }
 \description{
-Estimates from 2010 to 2013 for the COunties in Colorado.
+Population Estimates from 2010 to 2013 for the Counties in Colorado.
+}
+\details{
+See 'Data Dictionary' vignette for specifics on the dataset
 }
 \keyword{datasets}
 
