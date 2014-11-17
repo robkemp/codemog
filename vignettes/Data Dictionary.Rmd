@@ -4,7 +4,7 @@ author: "Rob Kemp"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Data Dictionary}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -75,7 +75,7 @@ Federal Information Processing Standards (FIPS) Number for each County, without 
 Estimate year, specifically reflects July 1 of each year.
 
 #####age:
-Single year of age.
+Single year of age, topcoded at 90.  A value of 90 contains the population for all those that are 90 and above.  
 
 #####county: 
 Name of the County
