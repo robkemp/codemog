@@ -5,8 +5,7 @@ Version: 0.1.13
 Date: 2014-11-14
 Authors@R: 'Rob Kemp <robert.kemp@state.co.us> [aut,cre]'
 Maintainer: Rob Kemp <robert.kemp@state.co.us>
-Description: This package contains the most recent vintage of population estimates for the counties and
-municipalities in Colorado, as well as county estimates or forecasts by age and sex from 1990 to 2040.
+Description: This package contains the most recent vintage of population estimates for the counties and municipalities in Colorado, as well as county estimates or forecasts by age and sex from 1990 to 2040.
 License: MIT + LICENSE
 LazyData: true
 Depends: R (>= 3.1.0)
