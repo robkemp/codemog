@@ -15,4 +15,4 @@ Install using the folowing code:
 NOTE:  If you are using a Windows computer, you'll need to have RTools installed.  You can downlaod and install that program here: <http://cran.r-project.org/bin/windows/Rtools/>.
 
 
-Documentation: Currently, the vignette with the data dictionary is not a part of the build, but will be soon.  In the meantime, there is a simple dicitonary in the /data folder and the RMarkdown document for the dictionary is included and can be rendered in RStudio using knitr.
+Documentation: Currently, the vignette with the data dictionary is not a part of the build, but will be soon.  In the meantime, there is a simple dicitonary in the `/data` folder and the RMarkdown document for the dictionary is included and can be rendered in RStudio using knitr.
