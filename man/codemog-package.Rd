@@ -7,8 +7,7 @@ Colorado State Demography Office Population Data
 
 }
 \description{
-This package contains the most recent vintage of population estimates for the counties and
-municipalities in Colorado, as well as county estimates or forecasts by age and sex from 1990 to 2040.
+This package contains the most recent vintage of population estimates for the counties and municipalities in Colorado, as well as county estimates or forecasts by age and sex from 1990 to 2040.
 }
 \details{
 \tabular{ll}{
