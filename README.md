@@ -11,5 +11,5 @@ If you have any quesitons on the data or package please feel free to contact: Ro
 The State Demography Office Website can be found here: <http://www.colorado.gov/demography>
 
 Install using the folowing code:
-`devtools::install_github("robkemp/codemog", build_vignettes = TRUE)`
+`devtools::install_github("robkemp/codemog")`
 NOTE:  If you are using a Windows computer, you'll need to have RTools installed.  You can downlaod and install that program here: <http://cran.r-project.org/bin/windows/Rtools/>.
