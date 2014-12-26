@@ -68,6 +68,7 @@ county_ts_chart=function(fips, beginyear=1990, endyear=2013){
   require(ggplot2, quietly=TRUE)
   require(scales, quietly=TRUE)  
   require(grid, quietly=TRUE)
+  fips=as.numeric(fips)
   
   d=county_forecast%>%
     filter(countyfips==fips, year<=endyear, year>=beginyear)%>%
