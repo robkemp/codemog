@@ -61,11 +61,11 @@ codemog_pal=c(
 #' @param fips The County FIPS number
 #' @param beginyear The first year in the timeseries Defaults to 1990.
 #' @param endyear The first year in the timeseries Defaults to 2013. 
-#' @import dplyr ggplot2 scales grid
+
 
 
 county_ts_chart=function(fips, beginyear=1990, endyear=2013){
-
+  require(dplyr, quietly=TRUE)
   fips=as.numeric(fips)
   
   d=county_forecast%>%
@@ -74,12 +74,12 @@ county_ts_chart=function(fips, beginyear=1990, endyear=2013){
     summarise(totalPopulation=sum(totalPopulation))%>%
     mutate(type=ifelse(year>=2014, "Forecast", "Estimate"))
   p=d%>%
-    ggplot(aes(x=as.factor(year), y=as.integer(totalPopulation), group=countyfips))+
-    geom_line(color=codemog_pal['dkblu'], size=1.75)+
-    labs(x="Year", y="Population", title=paste(d$county,"County Population,", beginyear, "to", endyear, sep=" "))+
-    scale_y_continuous(label=comma)+
+    ggplot2::ggplot(aes(x=as.factor(year), y=as.integer(totalPopulation), group=countyfips))+
+    ggplot2::geom_line(color=codemog_pal['dkblu'], size=1.75)+
+    ggplot2::labs(x="Year", y="Population", title=paste(d$county,"County Population,", beginyear, "to", endyear, sep=" "))+
+    scales::scale_y_continuous(label=comma)+
     theme_codemog()+
-    theme(axis.text.x=element_text(angle=90))
+    ggplot2::theme(axis.text.x=element_text(angle=90))
   return(p)
 }
 
@@ -93,12 +93,20 @@ county_ts_chart=function(fips, beginyear=1990, endyear=2013){
 #' @param state The initial State using a State FIPS (08=CO) Defaults to 08.
 #' @param fips2 A Place (or County) FIPS number for comparison Defaults to ""
 #' @param state2 The comparison place's State using a State FIPS (08=CO) Defaults to 08.
-#' @import dplyr ggplot2 scales grid reshape2 tidyr stringi
+
 
 ms_ed=function(fips, state="08", fips2="", state2="08"){
-  require(dplyr,quietly-TRUE)
+  require(dplyr, quietly=TRUE)
+  require(ggplot2, quietly=TRUE)
+  require(scales, quietly=TRUE)  
+  require(grid, quietly=TRUE)
+  require(reshape2, quietly=TRUE)
+  require(tidyr, quietly=TRUE)
+  require(stringi, quietly=TRUE)
+  
+  
   d13p=codemog_api(data="b15003",db="acs0913",geonum=paste("1",state , fips,sep=""),meta="no")
-  d13p[,7:32]=as.numeric(as.character(d13[,7:32]))
+  d13p[,7:32]=as.numeric(as.character(d13p[,7:32]))
   d13pm=d13p%>%
     mutate(ed1=b15003002+b15003003+b15003004+b15003005+b15003006+b15003007+b15003008+b15003009+b15003010+b15003011+
              b15003012,
@@ -109,13 +117,13 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
            ed6=b15003022,
            ed7=b15003023+b15003024+b15003025)%>%
     select(geoname:geonum,ed1:ed7)%>%
-    reshape2::melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
+    melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
     mutate(agecat=ordered(as.factor(variable), levels=c("ed1", "ed2", "ed3", "ed4", 
                                                         "ed5", "ed6", "ed7"), 
                           labels=c("Less than 9th grade", "9th to 12th grade",
                                    "High School Graduate \n(or GED)","Some College, \nno degree", "Associate's Degree", "Bachelor's Degree", 
                                    "Graduate or \nProfessional Degree")))%>%
-    tidyr::separate(geoname, into=c("geoname","statename"),sep=",")%>%
+    separate(geoname, into=c("geoname","statename"),sep=",")%>%
     select(-statename)%>%
     mutate(geoname=stri_trans_general(geoname,id="Title"))
   
@@ -131,7 +139,7 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
            ed6=b15003022,
            ed7=b15003023+b15003024+b15003025)%>%
     select(geoname:geonum,ed1:ed7)%>%
-    reshape2::melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
+    melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
     mutate(agecat=ordered(as.factor(variable), levels=c("ed1", "ed2", "ed3", "ed4", 
                                                         "ed5", "ed6", "ed7"), 
                           labels=c("Less than 9th grade", "9th to 12th grade",
@@ -141,14 +149,14 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
   d=rbind(d13cm,d13pm)%>%
     group_by(geoname)%>%
     mutate(p=value/sum(value))
-  p=ggplot2::ggplot(d, aes(x=agecat, y=p, fill=geoname))+
-    ggplot2::geom_bar(stat="identity", position="dodge")+#, fill=rgb(31,74,126, max=255))+ 
-    scales::scale_y_continuous(label=percent)+
-    ggplot2::scale_fill_manual(values=c(rgb(31,74,126, max=255), rgb(192,80,77,max=255)),
+  p=ggplot(d, aes(x=agecat, y=p, fill=geoname))+
+    geom_bar(stat="identity", position="dodge")+#, fill=rgb(31,74,126, max=255))+ 
+    scale_y_continuous(label=percent)+
+    scale_fill_manual(values=c(rgb(31,74,126, max=255), rgb(192,80,77,max=255)),
                       name="Geography")+
     theme_codemog()+
-    ggplot2::theme(axis.text.x=element_text(angle=0))+
-    ggplot2::labs(x="Age", y="Population", title="Educational Attainment \nSource: ACS 2013 5-Year File")
+    theme(axis.text.x=element_text(angle=0))+
+    labs(x="Age", y="Population", title="Educational Attainment \nSource: ACS 2013 5-Year File")
   return(p)
   
   
@@ -162,11 +170,17 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
 #'
 #' @param fips A Place (or County) FIPS number 
 #' @param state The initial State using a State FIPS (08=CO) Defaults to 08.
-#' @import dplyr ggplot2 scales grid reshape2 tidyr stringi
 #' 
 
 ms_census_age=function(fips, state="08"){
-  require(dplyr,quietly-TRUE)
+  require(dplyr, quietly=TRUE)
+  require(ggplot2, quietly=TRUE)
+  require(scales, quietly=TRUE)  
+  require(grid, quietly=TRUE)
+  require(reshape2, quietly=TRUE)
+  require(tidyr, quietly=TRUE)
+  require(stringr, quietly=TRUE)
+  
   d10=codemog_api(data="p12",db="c2010",geonum=paste("1",state , fips,sep=""),meta="no")
   d00=codemog_api(data="p12",db="c2000",geonum=paste("1",state , fips,sep=""), meta="no")
   d10[,7:56]=as.numeric(as.character(d10[,7:56]))
@@ -184,7 +198,7 @@ ms_census_age=function(fips, state="08"){
            age10=p12020+p12021+p12022+p12023+p12024+p12025+
              p12044+p12045+p12046+p12047+p12048+p12049)%>%
     select(geoname:geonum,age1:age10)%>%
-    reshape2::melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
+    melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
     mutate(
       agecat=ordered(as.factor(variable), levels=c("age1", "age2", "age3", "age4", 
                                                    "age5", "age6", "age7", "age8",
@@ -193,7 +207,7 @@ ms_census_age=function(fips, state="08"){
                               "10 to 14", "15 to 19", "20 to 24", "25 to 34","35 to 44", 
                               "45 to 54", "55 to 64", "65 and Over")),
       year="2010",
-      geoname=stringi::stri_trans_general(geoname, id="Title"))
+      geoname=stri_trans_general(geoname, id="Title"))
   d00c=d00%>%
     mutate(age1=p12003+p12027,
            age2=p12004+p12028,
@@ -207,7 +221,7 @@ ms_census_age=function(fips, state="08"){
            age10=p12020+p12021+p12022+p12023+p12024+p12025+
              p12044+p12045+p12046+p12047+p12048+p12049)%>%
     select(geoname:geonum,age1:age10)%>%
-    reshape2::melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
+    melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
     mutate(
       agecat=ordered(as.factor(variable), levels=c("age1", "age2", "age3", "age4", 
                                                    "age5", "age6", "age7", "age8",
@@ -216,16 +230,16 @@ ms_census_age=function(fips, state="08"){
                               "10 to 14", "15 to 19", "20 to 24", "25 to 34","35 to 44", 
                               "45 to 54", "55 to 64", "65 and Over")),
       year="2000",
-      geoname=stringi::stri_trans_general(geoname, id="Title"))
-  d=rbind(d10c, d00c)
-  p=ggplot2::ggplot(d, aes(x=agecat, y=value, fill=year))+
-    ggplot2::geom_bar(stat="identity", position="dodge")+
-    scales::scale_y_continuous(label=comma)+
-    ggplot2::scale_fill_manual(values=c(rgb(31,74,126, max=255), rgb(192,80,77,max=255)),
+      geoname=stri_trans_general(geoname, id="Title"))
+  d=rbind(d10c, d00c)#%>%spread(year,value)
+  p=ggplot(d, aes(x=agecat, y=value, fill=year))+
+    geom_bar(stat="identity", position="dodge")+#, fill=rgb(31,74,126, max=255))+ 
+    scale_y_continuous(label=comma)+
+    scale_fill_manual(values=c(rgb(31,74,126, max=255), rgb(192,80,77,max=255)),
                       name="Census Year",
                       breaks=c("2010", "2000"),
                       labels=c("2010","2000"))+
     theme_codemog()+
-    ggplot2::labs(x="Age", y="Population", title=paste(d10c$geoname, "Population by Age \nSource: U.S. Census Bureau"))
+    labs(x="Age", y="Population", title=paste(d10c$geoname, "Population by Age \nSource: U.S. Census Bureau"))
   return(p)
 }

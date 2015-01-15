@@ -10,6 +10,8 @@ Description: This package contains the most recent vintage of population
     here: <http://rpubs.com/robkemp/42244>
 License: MIT + LICENSE
 LazyData: true
+Depends:
+    R (>= 3.1.0)
 Imports:
     dplyr,
     ggplot2,
@@ -17,16 +19,7 @@ Imports:
     grid,
     tidyr,
     reshape2,
-    stringi
-Depends:
-    R (>= 3.1.0),
-    dplyr,
-    ggplot2,
-    scales,
-    grid,
-    tidyr,
-    reshape2,
-    stringi
+    stringr
 Suggests:
     knitr,
     rmarkdown
