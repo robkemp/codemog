@@ -91,9 +91,7 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
     theme_codemog()+
     theme(axis.text.x=element_text(angle=0))+
     labs(x="Age", y="Population", title="Educational Attainment \nSource: ACS 2013 5-Year File")
-chart=p
-data=d
-  return(list(chart, data))
+  return(p)
   
 }
 
@@ -165,8 +163,6 @@ ms_census_age=function(fips, state="08"){
                       labels=c("2010","2000"))+
     theme_codemog()+
     labs(x="Age", y="Population", title=paste(d10c$geoname, "Population by Age \nSource: U.S. Census Bureau"))
- chart=p
- data=d
-  return(list(chart, data))
+return(p)
 }
 
