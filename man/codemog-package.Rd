@@ -7,7 +7,7 @@ Colorado State Demography Office Population Data
 
 }
 \description{
-This package contains the most recent vintage of population estimates from the Colorado State Demography Office. Full documentation here: <http://rpubs.com/robkemp/42244>
+This package contains the most recent vintage of population estimates from the Colorado State Demography Office. Full documentation here: <http://rpubs.com/robkemp/54569>
 }
 \details{
 \tabular{ll}{
