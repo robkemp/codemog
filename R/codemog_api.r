@@ -13,7 +13,7 @@
 #' @param meta a command that indicates whether include feild and table meta data in line 2 Defaults to yes
 
 codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, type="csv", meta="yes"){
-  
+  require(data.table, quietly=TRUE)
   url_base="http://codemogapi-166520.usw1.nitrousbox.com/demog.php?"
   
   call=switch(datacall,
@@ -24,10 +24,11 @@ codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NUL
   sumlev=paste("&sumlev=", sumlev, sep="")
   type=paste("&type=", type, sep="")
   url=paste(url_base,db,call,geonum,sumlev,type, sep="")
-  x=read.csv(url, stringsAsFactors=FALSE)
+  x=fread(url, stringsAsFactors=FALSE)
   y=switch(meta,yes=x, no=x[-1,])
   return(y)
 }
+
 
 ms_ed=function(fips, state="08", fips2="", state2="08"){
   require(stringr, quietly=TRUE)
