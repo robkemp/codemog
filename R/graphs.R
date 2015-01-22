@@ -85,3 +85,45 @@ county_ts_chart=function(fips, beginyear=1990, endyear=2013){
   return(p)
 }
 
+
+#' Creates a \code{ggplot2} chart of the population for a CO municipality
+#'
+#' Takes some basic input on the timeperiod and county then creates a 
+#' plot of the data in \code{ggplot2}.  Similar to the muni_ts_data()
+#' function.  Can create timeseries from 1990 to 2040 (beyond 2013 are
+#' forecasts).
+#' Note: Requires dplyr, ggplot2, ggthemes, scales, and grid R packages.
+#'
+#' @param fips The County FIPS number (without leading Zeros)
+#' @param beginyear The first year in the timeseries Defaults to 1990.
+#' @param endyear The first year in the timeseries Defaults to 2013. 
+#' 
+
+muni_ts_chart=function(fips, beginyear=1990, endyear=2013){
+  require(dplyr, quietly=TRUE)
+  require(tidyr, quietly=TRUE)
+  require(ggplot2, quietly=TRUE)
+  require(scales, quietly=TRUE)  
+  require(grid, quietly=TRUE)
+  fips=as.numeric(fips)
+  
+  d=muni_est%>%
+    mutate(year=as.numeric(as.character(year)),
+           placefips=as.numeric(as.character(placefips)),
+           geonum=as.numeric(as.character(geonum)))%>%
+    select(geonum, placefips, municipality, year, totalPopulation)%>%
+    bind_rows(muni_hist%>%select(-countyfips))%>%
+    filter(year>=beginyear, year<=endyear)%>%
+    group_by(placefips,municipality,year)%>%
+    summarise(totalPopulation=sum(totalPopulation))%>%
+    filter(placefips==fips)
+  
+  p=d%>%
+    ggplot(aes(x=as.factor(year), y=as.integer(totalPopulation), group=placefips))+
+    geom_line(color=codemog_pal['dkblu'], size=1.75)+
+    labs(x="Year", y="Population", title=paste(d$municipality,"Population,", beginyear, "to", endyear, sep=" "))+
+    scale_y_continuous(label=comma)+
+    theme_codemog()+
+    theme(axis.text.x=element_text(angle=90))
+  return(p)
+}
