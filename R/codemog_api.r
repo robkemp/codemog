@@ -24,7 +24,7 @@ codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NUL
   sumlev=paste("&sumlev=", sumlev, sep="")
   type=paste("&type=", type, sep="")
   url=paste(url_base,db,call,geonum,sumlev,type, sep="")
-  x=fread(url, stringsAsFactors=FALSE)
+  x=read.csv(url, stringsAsFactors=FALSE)
   y=switch(meta,yes=x, no=x[-1,])
   return(y)
 }
