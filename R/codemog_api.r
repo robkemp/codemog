@@ -66,19 +66,17 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
   d13c[,7:32]=as.numeric(as.character(d13c[,7:32]))
   d13cm=d13c%>%
     mutate(ed1=b15003002+b15003003+b15003004+b15003005+b15003006+b15003007+b15003008+b15003009+b15003010+b15003011+
-             b15003012,
-           ed2=b15003013+b15003014+b15003015+b15003016,
-           ed3=b15003017+b15003018,
-           ed4=b15003019+b15003020,
-           ed5=b15003021,
-           ed6=b15003022,
-           ed7=b15003023+b15003024+b15003025)%>%
+             b15003012+b15003013+b15003014+b15003015+b15003016,
+           ed2=b15003017+b15003018,
+           ed3=b15003019+b15003020+b15003021,
+           ed4=b15003022,
+           ed5=b15003023+b15003024+b15003025)%>%
     select(geoname:geonum,ed1:ed7)%>%
     melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
     mutate(agecat=ordered(as.factor(variable), levels=c("ed1", "ed2", "ed3", "ed4", 
-                                                        "ed5", "ed6", "ed7"), 
-                          labels=c("Less than 9th grade", "9th to 12th grade",
-                                   "High School Graduate \n(or GED)","Some College, \nno degree", "Associate's Degree", "Bachelor's Degree", 
+                                                        "ed5"), 
+                          labels=c("Less than High School",
+                                   "High School Graduate \n(or GED)","Some College or \nAssociate's Degree", "Bachelor's Degree", 
                                    "Graduate or \nProfessional Degree")))%>%
     mutate(geoname=stri_replace_all_charclass(geoname, "\\p{WHITE_SPACE}", ""))
   d=rbind(d13cm,d13pm)%>%
