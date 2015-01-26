@@ -19,7 +19,7 @@ theme_codemog <- function(base_size = 12, base_family = "sans"){
     theme(
      line = element_line(),
      rect = element_blank(),
-     text = element_text(colour = codemog_pal['dkgray']),
+     text = element_text(colour = codemog_pal['dkgray'], size=base_size),
      axis.title = element_text(family=base_family, colour=codemog_pal['dkgray']),
      axis.text = element_text(colour=codemog_pal['dkgray'], family=base_family),
      axis.ticks = element_blank(),
@@ -29,10 +29,10 @@ theme_codemog <- function(base_size = 12, base_family = "sans"){
      legend.direction = "horizontal",
      legend.box = "vertical",
      panel.grid = element_line(colour = NULL),
-     panel.grid.major = element_line(colour = codemog_pal['medgray']),
+     panel.grid.major = element_line(colour = codemog_pal['medgray'], size=base_size*.05),
      panel.grid.minor = element_blank(),
      plot.title = element_text(hjust = 0, size = rel(1.5), face = "bold"),
-     plot.margin = unit(c(1, 1, 1, 1), "lines"),
+     plot.margin = unit(c(.2, .2, .2, .2), "lines"),
      strip.background=element_rect())
 }
 

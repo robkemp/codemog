@@ -30,8 +30,8 @@ codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NUL
 }
 
 
-ms_ed=function(fips, state="08", fips2="", state2="08"){
-  require(stringr, quietly=TRUE)
+ms_ed=function(fips, state="08", fips2="", state2="08", base=12){
+  require(stringi, quietly=TRUE)
   require(ggplot2, quietly=TRUE)
   require(scales, quietly=TRUE)  
   require(grid, quietly=TRUE)
@@ -44,19 +44,17 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
   d13p[,7:32]=as.numeric(as.character(d13p[,7:32]))
   d13pm=d13p%>%
     mutate(ed1=b15003002+b15003003+b15003004+b15003005+b15003006+b15003007+b15003008+b15003009+b15003010+b15003011+
-             b15003012,
-           ed2=b15003013+b15003014+b15003015+b15003016,
-           ed3=b15003017+b15003018,
-           ed4=b15003019+b15003020,
-           ed5=b15003021,
-           ed6=b15003022,
-           ed7=b15003023+b15003024+b15003025)%>%
-    select(geoname:geonum,ed1:ed7)%>%
+             b15003012+b15003013+b15003014+b15003015+b15003016,
+           ed2=b15003017+b15003018,
+           ed3=b15003019+b15003020+b15003021,
+           ed4=b15003022,
+           ed5=b15003023+b15003024+b15003025)%>%
+    select(geoname:geonum,ed1:ed5)%>%
     melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
     mutate(agecat=ordered(as.factor(variable), levels=c("ed1", "ed2", "ed3", "ed4", 
-                                                        "ed5", "ed6", "ed7"), 
-                          labels=c("Less than 9th grade", "9th to 12th grade",
-                                   "High School Graduate \n(or GED)","Some College, \nno degree", "Associate's Degree", "Bachelor's Degree", 
+                                                        "ed5"), 
+                          labels=c("Less than High School",
+                                   "High School Graduate \n(or GED)","Some College or \nAssociate's Degree", "Bachelor's Degree", 
                                    "Graduate or \nProfessional Degree")))%>%
     separate(geoname, into=c("geoname","statename"),sep=",")%>%
     select(-statename)%>%
@@ -71,7 +69,7 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
            ed3=b15003019+b15003020+b15003021,
            ed4=b15003022,
            ed5=b15003023+b15003024+b15003025)%>%
-    select(geoname:geonum,ed1:ed7)%>%
+    select(geoname:geonum,ed1:ed5)%>%
     melt(id=c("geoname", "state", "county", "place", "tract", "bg", "geonum"))%>%
     mutate(agecat=ordered(as.factor(variable), levels=c("ed1", "ed2", "ed3", "ed4", 
                                                         "ed5"), 
@@ -87,7 +85,7 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
     scale_y_continuous(label=percent)+
     scale_fill_manual(values=c(rgb(31,74,126, max=255), rgb(192,80,77,max=255)),
                       name="Geography")+
-    theme_codemog()+
+    theme_codemog(base_size=base)+
     theme(axis.text.x=element_text(angle=0))+
     labs(x="Age", y="Population", title="Educational Attainment \nSource: ACS 2013 5-Year File")
   return(p)
@@ -96,11 +94,11 @@ ms_ed=function(fips, state="08", fips2="", state2="08"){
 
 ms_census_age=function(fips, state="08"){
   require(ggplot2, quietly=TRUE)
+  require(stringi, quietly=TRUE)
   require(scales, quietly=TRUE)  
   require(grid, quietly=TRUE)
   require(reshape2, quietly=TRUE)
   require(tidyr, quietly=TRUE)
-  require(stringi, quietly=TRUE)
   require(dplyr, quietly=TRUE)
   d10=codemog_api(data="p12",db="c2010",geonum=paste("1",state , fips,sep=""),meta="no")
   d00=codemog_api(data="p12",db="c2000",geonum=paste("1",state , fips,sep=""), meta="no")
