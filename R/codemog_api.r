@@ -92,7 +92,7 @@ ms_ed=function(fips, state="08", fips2="", state2="08", base=12){
   
 }
 
-ms_census_age=function(fips, state="08"){
+ms_census_age=function(fips, state="08", base=12){
   require(ggplot2, quietly=TRUE)
   require(stringi, quietly=TRUE)
   require(scales, quietly=TRUE)  
@@ -158,7 +158,7 @@ ms_census_age=function(fips, state="08"){
                       name="Census Year",
                       breaks=c("2010", "2000"),
                       labels=c("2010","2000"))+
-    theme_codemog()+
+    theme_codemog(base_size=base)+
     labs(x="Age", y="Population", title=paste(d10c$geoname, "Population by Age \nSource: U.S. Census Bureau"))
 return(p)
 }
