@@ -63,7 +63,7 @@ codemog_pal=c(
 #' @param endyear The first year in the timeseries Defaults to 2013. 
 
 
-county_ts_chart=function(fips, beginyear=1990, endyear=2013){
+county_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
   require(dplyr, quietly=TRUE)
   require(ggplot2, quietly=TRUE)
   require(scales, quietly=TRUE)  
@@ -80,7 +80,7 @@ county_ts_chart=function(fips, beginyear=1990, endyear=2013){
     geom_line(color=codemog_pal['dkblu'], size=1.75)+
     labs(x="Year", y="Population", title=paste(d$county,"County Population,", beginyear, "to", endyear, sep=" "))+
     scale_y_continuous(label=comma)+
-    theme_codemog()+
+    theme_codemog(base_size=base)+
     theme(axis.text.x=element_text(angle=90))
   return(p)
 }
@@ -123,7 +123,7 @@ muni_ts_chart=function(fips, beginyear=1990, endyear=2013){
     geom_line(color=codemog_pal['dkblu'], size=1.75)+
     labs(x="Year", y="Population", title=paste(d$municipality,"Population,", beginyear, "to", endyear, sep=" "))+
     scale_y_continuous(label=comma)+
-    theme_codemog()+
+    theme_codemog(base_size=base)+
     theme(axis.text.x=element_text(angle=90))
   return(p)
 }
