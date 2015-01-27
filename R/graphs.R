@@ -99,7 +99,7 @@ county_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
 #' @param endyear The first year in the timeseries Defaults to 2013. 
 #' 
 
-muni_ts_chart=function(fips, beginyear=1990, endyear=2013){
+muni_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
   require(dplyr, quietly=TRUE)
   require(tidyr, quietly=TRUE)
   require(ggplot2, quietly=TRUE)
