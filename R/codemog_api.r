@@ -87,7 +87,7 @@ ms_ed=function(fips, state="08", fips2="", state2="08", base=12){
                       name="Geography")+
     theme_codemog(base_size=base)+
     theme(axis.text.x=element_text(angle=0))+
-    labs(x="Age", y="Population", title="Educational Attainment \nSource: ACS 2013 5-Year File")
+    labs(x="Educational Attainment", y="Population", title="Educational Attainment \nSource: ACS 2013 5-Year File")
   return(p)
   
 }
