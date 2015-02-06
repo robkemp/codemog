@@ -13,7 +13,6 @@
 #' @param meta a command that indicates whether include feild and table meta data in line 2 Defaults to yes
 
 codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, type="csv", meta="yes"){
-  require(data.table, quietly=TRUE)
   url_base="http://codemogapi-166520.usw1.nitrousbox.com/demog.php?"
   
   call=switch(datacall,
