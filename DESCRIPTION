@@ -8,6 +8,6 @@ Maintainer: Rob Kemp <robert.kemp@state.co.us>
 Description: This package contains the most recent vintage of population estimates from the Colorado State Demography Office. Full documentation here: <http://rpubs.com/robkemp/42244>
 License: MIT + LICENSE
 LazyData: true
-Depends: R (>= 3.1.0)
+Depends: R (>= 3.0.0)
 Suggests: knitr, dplyr, rmarkdown
 VignetteBuilder: knitr
