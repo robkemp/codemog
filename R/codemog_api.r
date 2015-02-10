@@ -13,7 +13,7 @@
 #' @param meta a command that indicates whether include feild and table meta data in line 2 Defaults to yes
 
 codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, type="csv", meta="yes"){
-  url_base="http://codemogapi-166520.usw1.nitrousbox.com/demog.php?"
+  url_base="http://54.69.15.55/api/demog.php?"
   
   call=switch(datacall,
               field=paste("&field=", data, sep=""),
