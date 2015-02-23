@@ -108,7 +108,7 @@ muni_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
   fips=as.numeric(fips)
   
   d=muni_est%>%
-    mutate(year=as.numeric(as.character(year)),
+    mutate(
            placefips=as.numeric(as.character(placefips)),
            geonum=as.numeric(as.character(geonum)))%>%
     select(geonum, placefips, municipality, year, totalPopulation)%>%
