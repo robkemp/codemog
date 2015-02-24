@@ -147,8 +147,8 @@ ms_census_age=function(fips, state="08", base=12){
     scale_y_continuous(label=comma)+
     scale_fill_manual(values=c(rgb(31,74,126, max=255), rgb(192,80,77,max=255)),
                       name="Census Year",
-                      breaks=c("2010", "2000"),
-                      labels=c("2010","2000"))+
+                      breaks=c("2000", "2010"),
+                      labels=c("2000","2010"))+
     theme_codemog(base_size=base)+
     labs(x="Age", y="Population", title=paste(d10c$geoname, "Population by Age \nSource: U.S. Census Bureau"))
 return(p)
