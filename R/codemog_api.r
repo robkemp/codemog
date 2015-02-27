@@ -12,16 +12,17 @@
 #' @param type can siwtch between JSON and CSV for output format (pretty much use CSV only) Defaults to CSV
 #' @param meta a command that indicates whether include feild and table meta data in line 2 Defaults to yes
 
-codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, type="csv", meta="yes"){
+codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, type="csv", meta="yes", geography="geonum"){
   url_base="http://54.69.15.55/CensusAPI/demog.php?"
   
   call=switch(datacall,
               field=paste("&field=", data, sep=""),
               table=paste("&table=", data, sep=""))
   db=paste("db=", db, sep="")
-  geog=switch(ifelse(is.na(sumlev), "geonum","sumlev"),
-              geonum=paste("&geonum=", geonum, sep=""),
-              sumlev=paste("&sumlev=", sumlev, sep=""))
+   geog=switch(geography, 
+               geonum=paste("&geonum=", geonum, sep=""),
+               sumlev=paste("&sumlev=", sumlev, sep=""))
+  
   type=paste("&type=", type, sep="")
   url=paste(url_base,db,call,geog,type, sep="")
   x=read.csv(url, stringsAsFactors=FALSE)
