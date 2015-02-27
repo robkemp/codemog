@@ -19,10 +19,11 @@ codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NUL
               field=paste("&field=", data, sep=""),
               table=paste("&table=", data, sep=""))
   db=paste("db=", db, sep="")
-  geonum=paste("&geonum=", geonum, sep="")
-  sumlev=paste("&sumlev=", sumlev, sep="")
+  geog=switch(ifelse(is.na(sumlev), "geonum","sumlev"),
+              geonum=paste("&geonum=", geonum, sep=""),
+              sumlev=paste("&sumlev=", sumlev, sep=""))
   type=paste("&type=", type, sep="")
-  url=paste(url_base,db,call,geonum,sumlev,type, sep="")
+  url=paste(url_base,db,call,geog,type, sep="")
   x=read.csv(url, stringsAsFactors=FALSE)
   y=switch(meta,yes=x, no=x[-1,])
   return(y)
