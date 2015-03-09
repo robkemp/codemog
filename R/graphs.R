@@ -61,6 +61,8 @@ codemog_pal=c(
 #' @param fips The County FIPS number (without leading Zeros)
 #' @param beginyear The first year in the timeseries Defaults to 1990.
 #' @param endyear The first year in the timeseries Defaults to 2013. 
+#' @param base Base font size.
+
 
 
 county_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
@@ -97,7 +99,7 @@ county_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
 #' @param fips The County FIPS number (without leading Zeros)
 #' @param beginyear The first year in the timeseries Defaults to 1990.
 #' @param endyear The first year in the timeseries Defaults to 2013. 
-#' 
+#' @param base Base font size.
 
 muni_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
   require(dplyr, quietly=TRUE)
