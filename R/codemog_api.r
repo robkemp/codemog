@@ -11,6 +11,7 @@
 #' @param sumlev can be used to call all geographies in a summary level (See Census for Definitions) Defaults to NULL
 #' @param type can siwtch between JSON and CSV for output format (pretty much use CSV only) Defaults to CSV
 #' @param meta a command that indicates whether include feild and table meta data in line 2 Defaults to yes
+#' @param geography is a switch that chooses use of a geonum for one area or a summary level for a specific type Defaults to geonum
 
 codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, type="csv", meta="yes", geography="geonum"){
   url_base="http://54.69.15.55/CensusAPI/demog.php?"
@@ -30,7 +31,16 @@ codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NUL
   return(y)
 }
 
-
+#' Creates a Chart comparing educational attainment of two areas
+#'
+#' Uses the codemog_api function to access ACS data (defaults to 13-5yr) to create a ggplot2 chart for
+#' use in profiles.  Included here as more of an example.
+#' 
+#' @param fips is the fips code for the main area to be compared
+#' @param state is the state that the original fips
+#' @param fips2 is the second area to be compared Defaults to Blank
+#' @param state2 is the state of the second place to be compared, is set to call up CO since fips2 is blank Defaults to 08
+#' @param base is the abse text size for the ggplot2 object and codemog_theme()
 ms_ed=function(fips, state="08", fips2="", state2="08", base=12){
   require(stringi, quietly=TRUE)
   require(ggplot2, quietly=TRUE)
@@ -92,6 +102,14 @@ ms_ed=function(fips, state="08", fips2="", state2="08", base=12){
   return(p)
   
 }
+
+#' Creates a chart comparing an areas age distributions in 2000 and 2010
+#'
+#' Uses the codemog_api function to access Census data to create a ggplot2 chart for
+#' use in profiles comparing the age distribution at the 2000 and 2010 Censuses.  Included here as more of an example.
+#' 
+#' @param fips is the fips code for the place or county
+#' @param state is the state that of the fips in the first argument
 
 ms_census_age=function(fips, state="08", base=12){
   require(ggplot2, quietly=TRUE)
