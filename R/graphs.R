@@ -30,7 +30,7 @@ theme_codemog <- function(base_size = 12, base_family = "sans"){
      legend.box = "vertical",
      panel.grid = element_line(colour = NULL),
      panel.grid.major = element_line(colour = codemog_pal['medgray'], size=base_size*.05),
-     panel.grid.minor = element_blank(),
+     panel.grid.minor = element_line(colour = codemog_pal['medgray'], size=base_size*.05),
      plot.title = element_text(hjust = 0, size = rel(1.5), face = "bold"),
      plot.margin = unit(c(.2, .2, .2, .2), "lines"),
      strip.background=element_rect())
