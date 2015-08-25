@@ -15,4 +15,6 @@ Install using the folowing code:
 NOTE:  If you are using a Windows computer, you'll need to have RTools installed.  You can download and install that program here: <http://cran.r-project.org/bin/windows/Rtools/>.
 
 
-Documentation: Currently, the vignette with the data dictionary is not a part of the build, but will be soon.  In the meantime, there is a simple dicitonary in the `/data` folder and the RMarkdown document for the dictionary is included and can be rendered in RStudio using knitr.
+Documentation: The data dictionary is available as a vignette here: <https://github.com/robkemp/codemog/vignettes>, and is also available in this Read Me:
+To ensure that you install the vignettes use:
+`devtools::install_github("robkemp/codemog", build_vignettes=TRUE)`
