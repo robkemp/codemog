@@ -354,6 +354,10 @@ print(county_jobs%>%filter(countyfips==31, year==2013)%>% select(sector_id, sect
  
  
 The State Demography Office produces an estimated cost of living estimate for each county in Colorado. A document describing the motivations and methods that go into the production of the Index is forthcoming.  
+This is a snapshot of the data:
+```{r, echo=FALSE}
+county_coli
+```
 
 #### Variable Descriptions
 
@@ -383,6 +387,11 @@ Rank of each county within the State from most to least expensive.
  
 The State Demography Office produced the age distribution of migration for Colorado Counties using Demographic Analysis on the 2000 and 2010 Decennial Census as SDO birth and death data.  The residual from births and deaths over the period is the net migration for each age.  
 
+This is a snapshot of the data:
+```{r, echo=FALSE}
+county_migbyage
+```
+
 #### Variable Descriptions
 
 #####countyfips: 
@@ -405,6 +414,11 @@ The net migration for that ge group within that county for the period spanning 2
  
 The State Demography Office produces a total job foreacst for Colorado, 57 counties, and the Denver Metro Area.  This data is not generated for each of the 7 Denver Metro counties, which are instead treated as an economic block. The data is historical from 1990 to 2013 and forecast after that.
 
+This is a snapshot of the data:
+```{r, echo=FALSE}
+jobs_forecast
+```
+
 #### Variable Descriptions
 #####countyfips: 
 Federal Information Processing Standards (FIPS) Number for each County, without leading zeros.
@@ -414,3 +428,79 @@ Forecast or Estimate Year
 
 #####totalJobs:
 Jobs number for that county and year.
+
+### county_base: State Demography Office Base Industry Analysis for Colorado and Counties
+ 
+The State Demography Office produces a base industry analysis for Colorado, 57 counties, and the Denver Metro Area.  This data is not generated for each of the 7 Denver Metro counties, which are instead treated as an economic block. The data is used to show the importance of each industry to the economy of a county.  
+
+This is a snapshot of the data:
+```{r, echo=FALSE}
+county_base
+```
+#### Variable Descriptions
+#####countyfips: 
+Federal Information Processing Standards (FIPS) Number for each County, without leading zeros.
+
+#####county: 
+Name of the County
+
+#####year: 
+Estimate Year
+
+#####baseIndustry:
+The nam of the industry 
+
+#####jobs:
+Jobs number for that county, industry, and year.
+
+#####geonum: 
+numeric, for merging with data from SDO PostgreSQL Census databases.
+
+#####industry_group:
+D - Direct Basic Total
+B - Base Industry
+T - Total Jobs
+I- Indirect Basic Total
+L - Local Resident Services
+
+### county_indchange: State Demography Office Job Change by Industry for Colorado and Counties
+ 
+Based on the unsupressed version of the SDO County Job Estimates, this dataset compares each of the previous years since 2002 to the most recent, 2014.    
+
+#### Variable Descriptions
+#####countyfips: 
+Federal Information Processing Standards (FIPS) Number for each County, without leading zeros.
+
+#####sector_id: 
+Numeric identifier for the name of the industry. See County Jobs above for listing.
+
+#####sector_name:
+String, name of the industry
+
+#####j_XX14:
+Compares the year denoted by 'xx' above to 2014. A '1' would mean there are the same amount of jobs in the 'xx' year and 2014, above 1 shows growth in the industry, below '1' shows decline.
+
+
+###  county_jobShare: State Demography Office Estimated Job Shares by Industry for Colorado Counties
+
+Based on the unsupressed version of the SDO County Job Estimates, this dataset shows the share of total jobs in a county within each industry. 
+
+This is a snapshot of the data:
+```{r, echo=FALSE}
+county_jobShare
+```
+#### Variable Descriptions
+#####countyfips: 
+Federal Information Processing Standards (FIPS) Number for each County, without leading zeros.
+
+#####sector_id: 
+Numeric identifier for the name of the industry.
+
+#####sector_name:
+String, name of the industry
+
+#####year: 
+Estimate Year
+
+#####jobShare: 
+numeric, share of total jobs in that industry.
