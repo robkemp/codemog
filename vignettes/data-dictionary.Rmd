@@ -504,3 +504,104 @@ Estimate Year
 
 #####jobShare: 
 numeric, share of total jobs in that industry.
+
+###  county_lfage: State Demography Office Estimated Labor Force by Age by County
+
+The State Demography Office produces an estimate of the labor force (Non-institutionalized population over 16 working or looking  for work) as a part of the population projections program.  This data is provided across 7 age groups for each county. Can be summed to get total labor force within a county.
+
+This is a snapshot of the data:
+```{r, echo=FALSE}
+county_lfage
+```
+#### Variable Descriptions
+#####countyfips: 
+Federal Information Processing Standards (FIPS) Number for each County, without leading zeros.
+
+#####county: 
+Name of the County
+
+#####age:
+Age group. Takes values of:
+16 to 19
+20 to 24
+25 to 34
+35 to 44
+45 to 54
+55 to 64
+65 and over
+
+#####year: 
+Estimate or Forecast Year
+
+#####laborForce:
+The number of people in the labor force (Non-institutionalized population over 16 working or looking  for work) for that county, year, and age group.
+
+
+###  county_lf_bls: U.S. Bureau of Labor Statistics Estimated Labor Force by County
+
+The BLS produces labor force estimate each year for counties in the US.  This dataset contains Colorado counties from 1990 to 2014.  Totals will differ with the SDO esitmates due to methodology differences.  For more information about these differences contact Cindy DeGroen (cindy.degroen@state.co.us).
+
+This is a snapshot of the data:
+```{r, echo=FALSE}
+county_lf_bls
+```
+#### Variable Descriptions
+#####countyfips: 
+Federal Information Processing Standards (FIPS) Number for each County, without leading zeros.
+
+
+
+#####year: 
+Estimate or Forecast Year
+
+#####laborForce:
+The number of people in the labor force for that county and year.
+
+
+###   county_profile: State Demography Office Demogrpahic Profile Dataset
+
+The State Demography Office compiles data from its population estimate program along with other sources such as the U.S. Census Bureau, to create a database for demographic profiles from 1985 to present.  That database is presented here.
+
+
+#####countyfips: 
+Federal Information Processing Standards (FIPS) Number for each County, without leading zeros.
+
+
+#####year: 
+Estimate  Year
+
+#####births:
+The number of births in a county from Colorado Department of Public Health and the Environment data.
+
+#####censusBuildingPermits:
+The number of building permits issued for the year based on data from the Building Permit Survey and Population Estimates program of the U.S. Census.
+
+#####deaths:
+The number of deaths in a county from Colorado Department of Public Health and the Environment data.
+
+#####groupQuartersPopulation
+Population in group quarters (e.g. dorms, prison, nursing homes, barracks, etc.) in the county. The specific definitions follow the U.S. Census Bureau definitions from Census 2010.
+
+#####householdPopulation:
+THe population of a county that lives in households rather than group quarters.  This includes anyone living in a housing unit that isn't specifically group quarters.  This tends to be most of the population.  Adding this variable to the group quarters population will obtain the total population for the county.
+
+#####households:
+Number of households in a county, defined as the number of occupied housing units.  
+
+#####householdSize:
+Average number of people per household.  Defined by dividing the householdPopulation by the number of households.
+
+#####naturalIncrease:
+The increase (or decrease if negative) in population due to the number of births minus the number of deaths.  
+
+#####netMigration:
+The increase (or decrease if negative) in population due to the number of in-migrants minus the number of out-migrants.
+
+#####totalHousingUnits:
+The total number of housing units in the county.  Generated from Housing stock in Census years and change tracked by building permits and certificates of occupancy data,
+
+#####vacancyRate:
+The proportion of total housing units that sit vacant. Calculated implicitly via the housing unit method based on Census year benchmarks.
+
+#####vacantHousingUnits:
+The number of housing units sitting vacant. This is dervied by applying the vacancy rate to the total number of households.
