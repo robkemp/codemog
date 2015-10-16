@@ -15,18 +15,18 @@ emp_cat= function(data, empvar="ESR", groups="basic",factor=TRUE){
     basic= list(
       recode="2=10;4:5=10; 3=11; 6=12",
       labels=c("Employed", "Unemployed", "Not In Labor Force"),
-      levels=3),
+      levels=12),
     military=list(
       recode="2=10;4:5=11; 3=12; 6=13",
       labels=c("Employed, Civilian","Employed, Armed Forces", "Unemployed", "Not In Labor Force"),
-      levels=4),
+      levels=13),
     lf= list(
       recode="2:5=10; 6=11",
       labels=c("In Labor Force", "Not In Labor Force"),
-      levels=2))
+      levels=11))
   grp=gl[[groups]]
   v=recode(data[[empvar]], grp$recode)
-  f=ordered(v,levels=1:grp$levels, labels=grp$labels)
+  f=ordered(v,levels=10:grp$levels, labels=grp$labels)
   if(factor==TRUE){
     return(f)
   } else{
