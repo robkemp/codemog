@@ -1,6 +1,6 @@
 #' County Estimates
 #'
-#' Population Estimates from 2010 to 2013 for the Counties in Colorado.
+#' Population Estimates from 2010 to 2014 for the Counties in Colorado.
 #'
 #' @format A data frame with nine variables: \code{geonum}, \code{countyfips},
 #'   \code{county}, \code{year}, \code{groupquartersPopulation}, \code{householdPopulation},\code{occupiedHousehold},
@@ -18,7 +18,7 @@
 
 #' Municipal Estimates
 #'
-#' Population Estimates from 2010 to 2013 for the Municipalities in Colorado.
+#' Population Estimates from 2010 to 2014 for the Municipalities in Colorado.
 #'
 #' @format A data frame with nine variables: \code{geonum}, \code{placefips},
 #'   \code{municipality}, \code{year}, \code{groupquartersPopulation}, \code{householdPopulation},\code{occupiedHousehold},
@@ -38,7 +38,7 @@
 
 #' Municipalities within County Estimates
 #'
-#' Population Estimates from 2010 to 2013 for the municipalities within counties in 
+#' Population Estimates from 2010 to 2014 for the municipalities within counties in 
 #' Colorado.
 #'
 #' @format A data frame with nine variables: \code{geonum}, \code{countyfips}, 
@@ -59,7 +59,7 @@
 
 #' County by Age and Sex Estimates and Forecasts
 #'
-#' Population Estimates from 1990 to 2013 and population forecasts from 2014 to 2040 for
+#' Population Estimates from 1990 to 2014 and population forecasts from 2014 to 2040 for
 #' counties in Colorado.
 #'
 #' @format A data frame with nine variables: \code{countyfips},\code{year}, \code{age}, 
@@ -70,7 +70,7 @@
 
 #' County Base Industry Analysis Data
 #'
-#' Jobs by Base Industry for Colorado Counties and the Metro Area in 2013
+#' Jobs by Base Industry for Colorado Counties and the Metro Area in 2014
 #'
 #' @format A data frame with nine variables: \code{geonum}, \code{countyfips},
 #'   \code{county}, \code{year}, \code{baseIndustry}, \code{jobs},\code{geonum}, and \code{industry_group}.
@@ -79,7 +79,7 @@
 
 #' County Base Industry Analysis Data
 #'
-#' Jobs by Base Industry for Colorado Counties and the Metro Area in 2013
+#' Jobs by Base Industry for Colorado Counties and the Metro Area in 2014
 #'
 #' @format A data frame with nine variables: \code{geonum}, \code{countyfips},
 #'   \code{county}, \code{year}, \code{baseIndustry}, \code{jobs},\code{geonum}, and \code{industry_group}.
@@ -88,7 +88,7 @@
 
 #' County Jobs Data
 #'
-#' Jobs by sector from 2001 to 2013, estimates created by the State Demography Office.
+#' Jobs by sector from 2001 to 2014, estimates created by the State Demography Office.
 #'
 #' @format A data frame with nine variables: \code{geonum}, \code{countyfips},
 #'   \code{sector_id}, \code{year}, \code{sector_name}, \code{jobs},\code{geonum}, and \code{total_flag}.
