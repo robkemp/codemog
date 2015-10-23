@@ -11,7 +11,7 @@
 county_est
 }
 \description{
-Population Estimates from 2010 to 2013 for the Counties in Colorado.
+Population Estimates from 2010 to 2014 for the Counties in Colorado.
 }
 \details{
 See 'Data Dictionary' vignette for specifics on the dataset

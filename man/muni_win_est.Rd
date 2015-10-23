@@ -12,7 +12,7 @@ and \code{totalPopulation}.}
 muni_win_est
 }
 \description{
-Population Estimates from 2010 to 2013 for the municipalities within counties in
+Population Estimates from 2010 to 2014 for the municipalities within counties in
 Colorado.
 }
 \details{

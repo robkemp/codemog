@@ -10,7 +10,7 @@
 county_jobs
 }
 \description{
-Jobs by sector from 2001 to 2013, estimates created by the State Demography Office.
+Jobs by sector from 2001 to 2014, estimates created by the State Demography Office.
 }
 \details{
 See 'Data Dictionary' vignette for specifics on the dataset: http://www.github.com/robkemp/codemog

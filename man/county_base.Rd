@@ -12,9 +12,9 @@ county_base
 county_base
 }
 \description{
-Jobs by Base Industry for Colorado Counties and the Metro Area in 2013
+Jobs by Base Industry for Colorado Counties and the Metro Area in 2014
 
-Jobs by Base Industry for Colorado Counties and the Metro Area in 2013
+Jobs by Base Industry for Colorado Counties and the Metro Area in 2014
 }
 \details{
 See 'Data Dictionary' vignette for specifics on the dataset: http://www.github.com/robkemp/codemog

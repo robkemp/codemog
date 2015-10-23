@@ -11,7 +11,7 @@
 muni_est
 }
 \description{
-Population Estimates from 2010 to 2013 for the Municipalities in Colorado.
+Population Estimates from 2010 to 2014 for the Municipalities in Colorado.
 }
 \details{
 See 'Data Dictionary' vignette for specifics on the dataset

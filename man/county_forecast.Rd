@@ -11,7 +11,7 @@
 county_forecast
 }
 \description{
-Population Estimates from 1990 to 2013 and population forecasts from 2014 to 2040 for
+Population Estimates from 1990 to 2014 and population forecasts from 2014 to 2040 for
 counties in Colorado.
 }
 \details{

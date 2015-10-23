@@ -4,16 +4,16 @@
 \alias{muni_ts_chart}
 \title{Creates a \code{ggplot2} chart of the population for a CO municipality}
 \usage{
-muni_ts_chart(fips, beginyear = 1990, endyear = 2013, base = 12)
+muni_ts_chart(fips, beginyear = 1990, base = 12)
 }
 \arguments{
 \item{fips}{The County FIPS number (without leading Zeros)}
 
 \item{beginyear}{The first year in the timeseries Defaults to 1990.}
 
-\item{endyear}{The first year in the timeseries Defaults to 2013.}
-
 \item{base}{Base font size.}
+
+\item{endyear}{The first year in the timeseries Defaults to 2013.}
 }
 \description{
 Takes some basic input on the timeperiod and county then creates a
