@@ -13,7 +13,7 @@
 #' @param meta a command that indicates whether include feild and table meta data in line 2 Defaults to yes
 #' @param geography is a switch that chooses use of a geonum for one area or a summary level for a specific type Defaults to geonum
 
-codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, state="08", type="csv", meta="yes", geography="geonum"){
+codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, state="08", type="csv", meta="yes", geography="geonum", limit="100"){
   url_base="http://54.69.15.55/CensusAPI/demog.php?"
   
   call=switch(datacall,
@@ -25,7 +25,8 @@ codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NUL
                sumlev=paste("&sumlev=", sumlev, sep=""))
   state=paste0("&state=", state)
   type=paste("&type=", type, sep="")
-  url=paste0(url_base,db,call,geog,state,type)
+  limit=paste0("&limit=", limit)
+  url=paste0(url_base,db,call,geog,state,type,limit)
   x=read.csv(url, stringsAsFactors=FALSE)
   y=switch(meta,yes=x, no=x[-1,])
   return(y)
