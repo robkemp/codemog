@@ -23,7 +23,7 @@ codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NUL
    geog=switch(geography, 
                geonum=paste("&geonum=", geonum, sep=""),
                sumlev=paste("&sumlev=", sumlev, sep=""))
-  state=paste0("&state=", state)
+  state=ifelse(state=="NA","",paste0("&state=", state))
   type=paste("&type=", type, sep="")
   limit=paste0("&limit=", limit)
   url=paste0(url_base,db,call,geog,state,type,limit)
