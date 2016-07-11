@@ -30,7 +30,7 @@ theme_codemog <- function(base_size = 12, base_family = "sans"){
      legend.box = "vertical",
      panel.grid = element_line(colour = NULL),
      panel.grid.major = element_line(colour = codemog_pal['medgray'], size=base_size*.05),
-     panel.grid.minor = element_blank(),
+     panel.grid.minor = element_line(colour = codemog_pal['medgray'], size=base_size*.05),
      plot.title = element_text(hjust = 0, size = rel(1.5), face = "bold"),
      plot.margin = unit(c(.2, .2, .2, .2), "lines"),
      strip.background=element_rect())
@@ -65,22 +65,25 @@ codemog_pal=c(
 
 
 
-county_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
+county_ts_chart=function(fips, beginyear=1990, base=12){
   require(dplyr, quietly=TRUE)
   require(ggplot2, quietly=TRUE)
   require(scales, quietly=TRUE)  
   require(grid, quietly=TRUE)
   fips=as.numeric(fips)
   
-  d=county_forecast%>%
-    filter(countyfips==fips, year<=endyear, year>=beginyear)%>%
+  d=county_est%>%
+    select(countyfips, county, year, totalPopulation)%>%
+#     bind_rows(select(county_hist, countyfips, county, year, totalPopulation))
+    bind_rows(county_hist)%>%
+    filter(countyfips==fips, year>=beginyear)%>%
     group_by(county,countyfips, year)%>%
-    summarise(totalPopulation=sum(totalPopulation))%>%
-    mutate(type=ifelse(year>=2014, "Forecast", "Estimate"))
+    summarise(totalPopulation=sum(totalPopulation))
+  
   p=d%>%
     ggplot(aes(x=as.factor(year), y=as.integer(totalPopulation), group=countyfips))+
     geom_line(color=codemog_pal['dkblu'], size=1.75)+
-    labs(x="Year", y="Population", title=paste(d$county,"County Population,", beginyear, "to", endyear, sep=" "))+
+    labs(x="Year", y="Population", title=paste(d$county,"County Population,", beginyear, "to", max(d$year), sep=" "))+
     scale_y_continuous(label=comma)+
     theme_codemog(base_size=base)+
     theme(axis.text.x=element_text(angle=90))
@@ -101,7 +104,7 @@ county_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
 #' @param endyear The first year in the timeseries Defaults to 2013. 
 #' @param base Base font size.
 
-muni_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
+muni_ts_chart=function(fips, beginyear=1990, base=12){
   require(dplyr, quietly=TRUE)
   require(tidyr, quietly=TRUE)
   require(ggplot2, quietly=TRUE)
@@ -115,7 +118,7 @@ muni_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
            geonum=as.numeric(as.character(geonum)))%>%
     select(geonum, placefips, municipality, year, totalPopulation)%>%
     bind_rows(muni_hist%>%select(-countyfips))%>%
-    filter(year>=beginyear, year<=endyear)%>%
+    filter(year>=beginyear)%>%
     group_by(placefips,municipality,year)%>%
     summarise(totalPopulation=sum(totalPopulation))%>%
     filter(placefips==fips)
@@ -123,7 +126,7 @@ muni_ts_chart=function(fips, beginyear=1990, endyear=2013, base=12){
   p=d%>%
     ggplot(aes(x=as.factor(year), y=as.integer(totalPopulation), group=placefips))+
     geom_line(color=codemog_pal['dkblu'], size=1.75)+
-    labs(x="Year", y="Population", title=paste(d$municipality,"Population,", beginyear, "to", endyear, sep=" "))+
+    labs(x="Year", y="Population", title=paste(d$municipality,"Population,", beginyear, "to", max(d$year), sep=" "))+
     scale_y_continuous(label=comma)+
     theme_codemog(base_size=base)+
     theme(axis.text.x=element_text(angle=90))
