@@ -13,7 +13,7 @@
 #' @param meta a command that indicates whether include feild and table meta data in line 2 Defaults to yes
 #' @param geography is a switch that chooses use of a geonum for one area or a summary level for a specific type Defaults to geonum
 
-codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, state="08", type="csv", meta="yes", geography="geonum", limit="100"){
+codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, state="08", type="csv", meta="yes", geography="geonum"){
   url_base = "https://gis.dola.colorado.gov/capi/demog?schema=data&"
   call = switch(datacall, field = paste("&field=", data, sep = ""), 
                 table = paste("&table=", data, sep = ""))
@@ -22,8 +22,7 @@ codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NUL
                                           sep = ""), sumlev = paste("&sumlev=", sumlev, sep = ""))
   state = ifelse(state == "NA", "", paste0("&state=", state))
   type = paste("&type=", type, sep = "")
-  # limit = paste0("&limit=", limit)
-  url = paste0(url_base, db, call, geog, state, type, limit)
+  url = paste0(url_base, db, call, geog, state, type)
   x = read.csv(url, stringsAsFactors = FALSE)
   y = switch(meta, yes = x, no = x[-1, ])
   return(y)
