@@ -14,21 +14,18 @@
 #' @param geography is a switch that chooses use of a geonum for one area or a summary level for a specific type Defaults to geonum
 
 codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, state="08", type="csv", meta="yes", geography="geonum", limit="100"){
-  url_base="http://54.69.15.55/CensusAPI/demog.php?"
-  
-  call=switch(datacall,
-              field=paste("&field=", data, sep=""),
-              table=paste("&table=", data, sep=""))
-  db=paste("db=", db, sep="")
-   geog=switch(geography, 
-               geonum=paste("&geonum=", geonum, sep=""),
-               sumlev=paste("&sumlev=", sumlev, sep=""))
-  state=ifelse(state=="NA","",paste0("&state=", state))
-  type=paste("&type=", type, sep="")
-  limit=paste0("&limit=", limit)
-  url=paste0(url_base,db,call,geog,state,type,limit)
-  x=read.csv(url, stringsAsFactors=FALSE)
-  y=switch(meta,yes=x, no=x[-1,])
+  url_base = "https://gis.dola.colorado.gov/capi/demog?schema=data&"
+  call = switch(datacall, field = paste("&field=", data, sep = ""), 
+                table = paste("&table=", data, sep = ""))
+  db = paste("db=", db, sep = "")
+  geog = switch(geography, geonum = paste("&geonum=", geonum, 
+                                          sep = ""), sumlev = paste("&sumlev=", sumlev, sep = ""))
+  state = ifelse(state == "NA", "", paste0("&state=", state))
+  type = paste("&type=", type, sep = "")
+  # limit = paste0("&limit=", limit)
+  url = paste0(url_base, db, call, geog, state, type, limit)
+  x = read.csv(url, stringsAsFactors = FALSE)
+  y = switch(meta, yes = x, no = x[-1, ])
   return(y)
 }
 
