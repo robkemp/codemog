@@ -14,7 +14,7 @@
 #' @param geography is a switch that chooses use of a geonum for one area or a summary level for a specific type Defaults to geonum
 
 codemog_api=function(datacall="table",data, db="c2010", geonum="108", sumlev=NULL, state="08", type="csv", meta="yes", geography="geonum"){
-  url_base = "https://gis.dola.colorado.gov/capi/demog?schema=data&"
+  url_base = "https://gis.dola.colorado.gov/capi/demog?"
   call = switch(datacall, field = paste("&field=", data, sep = ""), 
                 table = paste("&table=", data, sep = ""))
   db = paste("db=", db, sep = "")
